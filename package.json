@@ -19,6 +19,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "crisp-sdk-web": "^1.0.25",
+    "git-filter-repo": "^0.0.30",
     "lucide-react": "^0.390.0",
     "next": "14.2.3",
     "openai": "^4.49.1",
