@@ -10,7 +10,7 @@ export default function LandingHero() {
   const { isSignedIn } = useAuth();
 
   return (
-    <div className="text-white font-bold py-36 text-center space-y-5 bg-gradient-to-r from-blue-950 to-blue-600">
+    <div className="text-white font-bold py-36 text-center space-y-5 bg-gradient-to-r from-slate-600 to-slate-900">
       <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl space-y-5 font-extrabold">
         <h1>Tool For Smart Studying </h1>
         <div className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-pink-500">

@@ -18,7 +18,7 @@ export default function LandingNavbar() {
   const { isSignedIn } = useAuth();
 
   return (
-    <nav className="p-4 bg-transparent flex items-center justify-between bg-gradient-to-r from-blue-700 to-blue-300 ">
+    <nav className="p-4 bg-transparent flex items-center justify-between bg-gradient-to-r from-slate-500 to-slate-900 ">
       <Link href="/" className="flex items-center">
         <div className="relative h-8 w-8 mr-4">
           <Image fill alt="Smarttudy Logo" src="/fulllogo.png" />

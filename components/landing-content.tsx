@@ -57,7 +57,7 @@ const features = [
 
 export default function LandingContent() {
   return (
-    <div className="px-10 pb-20 bg-gradient-to-r from-blue-700 to-blue-300">
+    <div className="px-10 pb-20 bg-gradient-to-r from-slate-600 to-slate-900">
       <h2 className="text-center text-4xl text-white font-extrabold mb-10 p-10">
         Features
       </h2>
