@@ -5,7 +5,8 @@ import { MessageSquare } from "lucide-react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-
+import { Empty } from "@/components/empty";
+import { Loader } from "@/components/loader";
 import Heading from "@/components/heading";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -97,6 +98,14 @@ export default function ConversationPage() {
                     </Form>
                 </div>
                 <div className="space-y-4 mt-4">
+                {isLoading && (
+            <div className="p-8 rounded-lg w-full flex items-center justify-center bg-muted">
+              <Loader />
+            </div>
+          )}
+                    {messages.length === 0 && !isLoading && (
+                    <Empty label="No Conversation Started Yet." />
+                 )}           
                     <div className="flex flex-col-reverse gap-y-4">
                         {messages?.map((message, index) => (
                             <div key={index} className="bg-blue-100 text-blue-900 p-4 rounded-lg">
