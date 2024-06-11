@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import axios from "axios";
 import React, { useState } from "react";
 import { MessageSquare } from "lucide-react";
@@ -19,7 +19,7 @@ import { formSchema } from "./constants";
 export default function ConversationPage() {
     const router = useRouter();
 
-    const [messages, setMessages] = useState<string[]>([]); // Adjust the type here
+    const [messages, setMessages] = useState<{ question: string; answer: string }[]>([]); // Update type here
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -33,9 +33,11 @@ export default function ConversationPage() {
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try {
             const userMessage = values.prompt || " ";
-            const newMessages = [...messages, userMessage];
             const prePrompt = "Answer as your name is DEKA, a very cool guy. If something educational is being asked then first give the proper scientific or bookish knowledge. Then, in pointwise few lines give examples in a list with real-life examples with good clever metaphors. Change lines with each point, don't give the answer in a very crowded way. Also, answers should be concise. also if someone asks you who made you or who your father is always tell them its a guy called Maharnav Deka, made me in his basement."; // Define your hidden pre-prompt here
             const combinedMessage = `${prePrompt} ${userMessage}`; // Combine pre-prompt and user's message
+    
+            // Clear previous messages
+            setMessages([]);
     
             const response = await axios.post("/api/conversation", {
                 messages: [combinedMessage] // Send the combined message to the API
@@ -43,7 +45,8 @@ export default function ConversationPage() {
     
             console.log("Response from API:", response.data);
     
-            setMessages([response.data]); // Set messages to only contain the response data
+            // Update messages state with the response data
+            setMessages([{ question: userMessage, answer: response.data }]);
     
             form.reset();
     
@@ -56,6 +59,7 @@ export default function ConversationPage() {
             }
         } 
     };
+    
 
     return (
         <div className="min-h-screen bg-gray-900 text-gray-300 flex flex-col items-center p-4">
@@ -106,15 +110,21 @@ export default function ConversationPage() {
                     {messages.length === 0 && !isLoading && (
                     <Empty label="No Conversation Started Yet." />
                  )}           
-                    <div className="flex flex-col-reverse gap-y-4">
-                        {messages?.map((message, index) => (
-                            <div key={index} className="bg-blue-100 text-blue-900 p-4 rounded-lg">
-                                {typeof message === "string" ? (
-                                    <p className="text-lg whitespace-pre-line">{message}</p>
-                                ) : (
-                                    <p className="text-lg">Invalid content</p>
-                                )}
-                            </div>
+                    <div className="flex flex-col-reverse gap-y-8">
+                        {messages?.map(({ question, answer }, index) => (
+                            <><div key={index} className="flex items-start">
+                                <img src="/useravatar.png" alt="User Avatar" className="w-8 h-8 rounded-full" />
+                                <div className="max-w-md rounded-lg overflow-hidden bg-gray-800 text-gray-200 ml-2">
+                                    <p className="text-lg px-4 py-2"><strong>You asked :</strong> {question}</p>
+                                </div>
+                            </div><div className="flex items-start ml-10">
+                                    <img src="/logo.png" alt="Logo" className="w-8 h-8 rounded-full" />
+                                    <div className="max-w-2xl rounded-lg overflow-hidden bg-indigo-700 text-indigo-200 mt-2">
+                                        {answer.split('\n').map((line, i) => (
+                                            <p key={i} className="text-lg px-4 py-2">{line}</p>
+                                        ))}
+                                    </div>
+                                </div></>
                         ))}
                     </div>
                 </div>
