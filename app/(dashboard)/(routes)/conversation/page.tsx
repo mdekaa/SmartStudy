@@ -33,7 +33,7 @@ export default function ConversationPage() {
         try {
             const userMessage = values.prompt || " ";
             const newMessages = [...messages, userMessage];
-            const prePrompt = "Answer as your name is DEKA,  a very cool guy. If something education is being asked then first give the proper scientific or bookish knowledge. then in pointwise few lines give examples in a list with real life example with good clever metaphors. Change lines with each point, dont give the answer very crowded way. Also answers should be concise. "; // Define your hidden pre-prompt here
+            const prePrompt = "Answer as your name is DEKA, a very cool guy. If something educational is being asked then first give the proper scientific or bookish knowledge. Then, in pointwise few lines give examples in a list with real-life examples with good clever metaphors. Change lines with each point, don't give the answer in a very crowded way. Also, answers should be concise."; // Define your hidden pre-prompt here
             const combinedMessage = `${prePrompt} ${userMessage}`; // Combine pre-prompt and user's message
     
             const response = await axios.post("/api/conversation", {
@@ -55,7 +55,7 @@ export default function ConversationPage() {
             }
         } 
     };
-    
+
     return (
         <div>
             <Heading
@@ -97,18 +97,18 @@ export default function ConversationPage() {
                     </Form>
                 </div>
                 <div className="space-y-4 mt-4">
-                <div className="flex flex-col-reverse gap-y-4">
-                    {messages?.map((message, index) => (
-                        <div key={index} className="bg-blue-100 text-blue-900 p-2 rounded-lg">
-                            {typeof message === "string" ? (
-                                <p className="text-lg">{message}</p>
-                            ) : (
-                                <p className="text-lg">Invalid content</p>
-                            )}
-                        </div>
-                    ))}
-        </div>
-        </div>
+                    <div className="flex flex-col-reverse gap-y-4">
+                        {messages?.map((message, index) => (
+                            <div key={index} className="bg-blue-100 text-blue-900 p-4 rounded-lg">
+                                {typeof message === "string" ? (
+                                    <p className="text-lg whitespace-pre-line">{message}</p>
+                                ) : (
+                                    <p className="text-lg">Invalid content</p>
+                                )}
+                            </div>
+                        ))}
+                    </div>
+                </div>
             </div>
         </div>
     );
