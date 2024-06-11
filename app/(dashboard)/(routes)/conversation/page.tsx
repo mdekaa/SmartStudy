@@ -58,7 +58,7 @@ export default function ConversationPage() {
     };
 
     return (
-        <div>
+        <div className="min-h-screen bg-gray-900 text-gray-300 flex flex-col items-center p-4">
             <Heading
                 title="Doubt Solver AI"
                 description="Solve your basic doubts in minutes!!!"
@@ -90,16 +90,16 @@ export default function ConversationPage() {
                             />
                             <Button
                                 disabled={isLoading}
-                                className="col-span-12 lg:col-span-2 w-full"
+                                className="col-span-12 lg:col-span-2 w-full bg-gradient-to-r from-slate-900 to-slate-500"
                             >
-                                Generate
+                                Ask Me
                             </Button>
                         </form>
                     </Form>
                 </div>
                 <div className="space-y-4 mt-4">
                 {isLoading && (
-            <div className="p-8 rounded-lg w-full flex items-center justify-center bg-muted">
+            <div className="p-8 rounded-lg w-full flex items-center justify-center bg-gradient-to-r from-slate-900 to-slate-500 ">
               <Loader />
             </div>
           )}
