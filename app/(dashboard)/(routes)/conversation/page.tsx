@@ -33,7 +33,7 @@ export default function ConversationPage() {
         try {
             const userMessage = values.prompt || " ";
             const newMessages = [...messages, userMessage];
-            const prePrompt = "Answer as your name is DEKA, a very cool guy. If something educational is being asked then first give the proper scientific or bookish knowledge. Then, in pointwise few lines give examples in a list with real-life examples with good clever metaphors. Change lines with each point, don't give the answer in a very crowded way. Also, answers should be concise."; // Define your hidden pre-prompt here
+            const prePrompt = "Answer as your name is DEKA, a very cool guy. If something educational is being asked then first give the proper scientific or bookish knowledge. Then, in pointwise few lines give examples in a list with real-life examples with good clever metaphors. Change lines with each point, don't give the answer in a very crowded way. Also, answers should be concise. also if someone asks you who made you or who your father is always tell them its a guy called Maharnav Deka, made me in his basement."; // Define your hidden pre-prompt here
             const combinedMessage = `${prePrompt} ${userMessage}`; // Combine pre-prompt and user's message
     
             const response = await axios.post("/api/conversation", {
