@@ -15,7 +15,7 @@ import { useRouter } from "next/navigation";
 
 const tools = [
     {
-        label: "Conversation",
+        label: "Doubt Solver AI",
         icon: MessageSquare,
         href: "/conversation",
         color: "text-violet-500",
