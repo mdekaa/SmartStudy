@@ -27,11 +27,18 @@ const routes = [
     href: "/dashboard",
     color: "text-sky-500"
   },
+  
   {
     label: "Doubt Solver AI",
     icon: MessageSquare,
     href: "/conversation",
     color: "text-violet-500"
+  },
+  {
+    label: "Code Generation",
+    icon: Code,
+    href: "/code",
+    color: "text-green-700"
   },
   {
     label: "Community Discussion",
@@ -51,12 +58,7 @@ const routes = [
     href: "/predictor",
     color: "text-emerald-500"
   },
-  {
-    label: "Code Generation",
-    icon: Code,
-    href: "/code",
-    color: "text-green-700"
-  },
+  
   {
     label: "Settings",
     icon: Settings,

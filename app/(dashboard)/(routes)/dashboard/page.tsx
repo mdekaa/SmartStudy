@@ -22,6 +22,13 @@ const tools = [
         bgColor: "bg-violet-500/10",
       }, 
       {
+        label: "Code Generation",
+        icon: Code,
+        href: "/code",
+        color: "text-green-700",
+        bgColor: "bg-violet-500/10",
+      },
+      {
         label: "Community Discussion",
         icon: HandHelping,
         href: "/community",
@@ -42,13 +49,7 @@ const tools = [
         color: "text-emerald-500",
         bgColor: "bg-violet-500/10",
       },
-      {
-        label: "Code Generation",
-        icon: Code,
-        href: "/code",
-        color: "text-green-700",
-        bgColor: "bg-violet-500/10",
-      },
+      
 ]
 
 const DashboardPage = () => {
