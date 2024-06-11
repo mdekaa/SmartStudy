@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useState } from 'react';
-import PostList from './postList';
-import PostForm from './postForm';
-import CommunityContent from './community-content';
+import PostList from '@/components/postList';
+import PostForm from '@/components/postForm';
+import CommunityContent from '@/components/community-content';
 
 
 const DiscussionPage: React.FC = () => {

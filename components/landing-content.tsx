@@ -2,17 +2,19 @@
 
 import React from "react";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
+// import DiscussionPage from "./discussion";
 
 
 import {
-    
-    MessageSquare,
-    HandHelping,
-    BookOpen,
-    Calculator,
-    Code,
-    Settings
-  } from "lucide-react";
+
+  MessageSquare,
+  HandHelping,
+  BookOpen,
+  Calculator,
+  Code,
+  Settings
+} from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 
@@ -21,37 +23,44 @@ const features = [
     name: "Doubt Solver AI",
     avatar: MessageSquare,
     title: "kiba kibi xory title",
-    description: "EXPLANATION HKADCBDHAKVBDKHV"
+    description: "EXPLANATION HKADCBDHAKVBDKHV",
+    linkPage: "/"
   },
   {
     name: "Ultimate Resources",
     avatar: MessageSquare,
     title: "sfvnknksfvbf",
-    description: "ADVHKBHVDVHKADVKKA KHBKV"
+    description: "ADVHKBHVDVHKADVKKA KHBKV",
+    linkPage: "/"
+
   },
   {
     name: "Community Discussion",
     avatar: MessageSquare,
     title: "dhvbdhvbkhdavbkhv",
-    description:"MADNV DJHAVBAHKVBAVBJHVB"
+    description: "MADNV DJHAVBAHKVBAVBJHVB",
+    linkPage: "/community"
   },
   {
     name: "Chat with Teachers",
     avatar: MessageSquare,
     title: "djvnkjsvnsv",
-    description: "AKDVHJBAJHDVJ"
+    description: "AKDVHJBAJHDVJ",
+    linkPage: "./discussion"
   },
   {
     name: "CGPA Predictor",
     avatar: MessageSquare,
     title: "djvnkjsvnsv",
-    description: "AKDVHJBAJHDVJVBAHJVDBKK"
+    description: "AKDVHJBAJHDVJVBAHJVDBKK",
+    linkPage: "/"
   },
   {
     name: "Attendance Tracker",
     avatar: MessageSquare,
     title: "djvnkjsvnsv",
-    description: "AKDVHJBAJHDVJVBAHJ"
+    description: "AKDVHJBAJHDVJVBAHJ",
+    linkPage: "/"
   }
 ];
 
@@ -67,25 +76,27 @@ export default function LandingContent() {
             key={item.description}
             className="bg-[#192339] border-none text-white"
           >
-            <CardHeader>
-              <div className="flex flex-row items-center">
-                <div className="h-10 w-10 mr-4">
+            <Link href={item.linkPage}>
+              <CardHeader>
+                <div className="flex flex-row items-center">
+                  <div className="h-10 w-10 mr-4">
                     <div className="flex items-center flex-1">
-                    <item.avatar className={cn("h-5 w-5 mr-3")} />
-                    
-                </div>
-                </div>
-                <CardTitle className="flex items-center gap-x-2">
-                  <div>
-                    <p className="text-lg">{item.name}</p>
-                    <p className="text-zinc-400 text-sm">{item.title}</p>
+                      <item.avatar className={cn("h-5 w-5 mr-3")} />
+
+                    </div>
                   </div>
-                </CardTitle>
-              </div>
-              <CardContent className="pt-4 px-0 w-12">
-                {item.description}
-              </CardContent>
-            </CardHeader>
+                  <CardTitle className="flex items-center gap-x-2">
+                    <div>
+                      <p className="text-lg">{item.name}</p>
+                      <p className="text-zinc-400 text-sm">{item.title}</p>
+                    </div>
+                  </CardTitle>
+                </div>
+                <CardContent className="pt-4 px-0 w-12">
+                  {item.description}
+                </CardContent>
+              </CardHeader>
+            </Link >
           </Card>
         ))}
       </div>
