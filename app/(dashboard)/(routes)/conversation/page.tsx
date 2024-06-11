@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import axios from "axios";
 import React, { useState } from "react";
 import { MessageSquare } from "lucide-react";
@@ -16,10 +16,14 @@ import { useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { formSchema } from "./constants";
 
+// Clerk imports
+import { useUser } from '@clerk/clerk-react';
+
 export default function ConversationPage() {
     const router = useRouter();
+    const { user } = useUser(); // Clerk hook to get the user
 
-    const [messages, setMessages] = useState<{ question: string; answer: string }[]>([]); // Update type here
+    const [messages, setMessages] = useState<{ question: string; answer: string }[]>([]);
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -59,7 +63,6 @@ export default function ConversationPage() {
             }
         } 
     };
-    
 
     return (
         <div className="min-h-screen bg-gray-900 text-gray-300 flex flex-col items-center p-4">
@@ -102,29 +105,32 @@ export default function ConversationPage() {
                     </Form>
                 </div>
                 <div className="space-y-4 mt-4">
-                {isLoading && (
-            <div className="p-8 rounded-lg w-full flex items-center justify-center bg-gradient-to-r from-slate-900 to-slate-500 ">
-              <Loader />
-            </div>
-          )}
+                    {isLoading && (
+                        <div className="p-8 rounded-lg w-full flex items-center justify-center bg-gradient-to-r from-slate-900 to-slate-500 ">
+                            <Loader />
+                        </div>
+                    )}
                     {messages.length === 0 && !isLoading && (
-                    <Empty label="No Conversation Started Yet." />
-                 )}           
+                        <Empty label="No Conversation Started Yet." />
+                    )}
                     <div className="flex flex-col-reverse gap-y-8">
                         {messages?.map(({ question, answer }, index) => (
-                            <><div key={index} className="flex items-start">
-                                <img src="/useravatar.png" alt="User Avatar" className="w-8 h-8 rounded-full" />
-                                <div className="max-w-md rounded-lg overflow-hidden bg-gray-800 text-gray-200 ml-2">
-                                    <p className="text-lg px-4 py-2"><strong>You asked :</strong> {question}</p>
-                                </div>
-                            </div><div className="flex items-start ml-10">
+                            <div key={index}>
+                                <div className="flex items-start">
                                     <img src="/logo.png" alt="Logo" className="w-8 h-8 rounded-full" />
-                                    <div className="max-w-2xl rounded-lg overflow-hidden bg-indigo-700 text-indigo-200 mt-2">
+                                    <div className="max-w-2xl rounded-lg overflow-hidden bg-blue-600 text-white ml-2">
                                         {answer.split('\n').map((line, i) => (
                                             <p key={i} className="text-lg px-4 py-2">{line}</p>
                                         ))}
                                     </div>
-                                </div></>
+                                </div>
+                                <div className="flex items-start ml-10 mt-2">
+                                    <img src={user?.imageUrl || "/useravatar.png"} alt="User Avatar" className="w-8 h-8 rounded-full" />
+                                    <div className="max-w-md rounded-lg overflow-hidden bg-gray-800 text-gray-200 ml-2">
+                                        <p className="text-lg px-4 py-2"><strong>You asked:</strong> {question}</p>
+                                    </div>
+                                </div>
+                            </div>
                         ))}
                     </div>
                 </div>
