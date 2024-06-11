@@ -6,13 +6,11 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import OpenAI from "openai/index.mjs";
-import { useRouter } from "next/navigation";
-
 import Heading from "@/components/heading";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 
 import { cn } from "@/lib/utils";
 import { formSchema } from "./constants";
@@ -20,7 +18,7 @@ import { formSchema } from "./constants";
 export default function ConversationPage() {
     const router = useRouter();
 
-    const [messages, setMessages] = useState<OpenAI.Chat.ChatCompletionMessageParam[]>([]);
+    const [messages, setMessages] = useState<string[]>([]); // Adjust the type here
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -33,22 +31,21 @@ export default function ConversationPage() {
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try {
-            const userMessage: OpenAI.Chat.ChatCompletionMessageParam = {
-                role: "user",
-                content: values.prompt || " "
-            };
+            const userMessage = values.prompt || " ";
             const newMessages = [...messages, userMessage];
-
+            const prePrompt = "Answer as your name is Maharnav a very funny cool guy "; // Define your hidden pre-prompt here
+            const combinedMessage = `${prePrompt} ${userMessage}`; // Combine pre-prompt and user's message
+    
             const response = await axios.post("/api/conversation", {
-                messages: newMessages
+                messages: [combinedMessage] // Send the combined message to the API
             });
-
+    
             console.log("Response from API:", response.data);
-
-            setMessages((current) => [...current, userMessage, response.data]);
-
+    
+            setMessages([response.data]); // Set messages to only contain the response data
+    
             form.reset();
-
+    
         } catch (error: any) {
             if (error.response?.status === 429) {
                 alert("Quota exceeded. Please check your plan and billing details.");
@@ -56,11 +53,9 @@ export default function ConversationPage() {
                 console.log("Error in onSubmit:", error);
                 alert("An error occurred. Please try again later.");
             }
-        } finally {
-            router.refresh();
-        }
+        } 
     };
-
+    
     return (
         <div>
             <Heading
@@ -85,7 +80,7 @@ export default function ConversationPage() {
                                             <Input
                                                 disabled={isLoading}
                                                 placeholder="What is Maxwell's 69th Law"
-                                                className="pl-2 border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent"
+                                                className="pl-2 border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent w-full h-10 rounded-lg bg-gray-100 text-gray-800 text-lg"
                                                 {...field}
                                             />
                                         </FormControl>
@@ -102,14 +97,18 @@ export default function ConversationPage() {
                     </Form>
                 </div>
                 <div className="space-y-4 mt-4">
-                    <div className="flex flex-col-reverse gap-y-4">
-                        {messages?.map((message, index) => (
-                            <div key={index}>
-                                {typeof message.content === "string" ? message.content : "Invalid content"}
-                            </div>
-                        ))}
-                    </div>
-                </div>
+                <div className="flex flex-col-reverse gap-y-4">
+                    {messages?.map((message, index) => (
+                        <div key={index} className="bg-blue-100 text-blue-900 p-2 rounded-lg">
+                            {typeof message === "string" ? (
+                                <p className="text-lg">{message}</p>
+                            ) : (
+                                <p className="text-lg">Invalid content</p>
+                            )}
+                        </div>
+                    ))}
+        </div>
+        </div>
             </div>
         </div>
     );
