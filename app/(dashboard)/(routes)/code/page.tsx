@@ -19,7 +19,7 @@ import { formSchema } from "./constants";
 export default function ConversationPage() {
     const router = useRouter();
 
-    const [messages, setMessages] = useState<string[]>([]); // Adjust the type here
+    const [messages, setMessages] = useState<string[]>([]);
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -58,59 +58,57 @@ export default function ConversationPage() {
     };
 
     return (
-        <div>
+        <div className="min-h-screen bg-gray-900 text-gray-300 flex flex-col items-center p-4">
             <Heading
                 title="Code Generation"
                 description="Generate Code Using Prompts"
                 icon={Code}
-                iconColor="text-green-700"
-                bgColor="bg-green-700/10"
+                iconColor="text-green-400"
+                bgColor="bg-green-700/20"
             />
-            <div className="px-4 lg:px-8">
-                <div>
-                    <Form {...form}>
-                        <form
-                            onSubmit={form.handleSubmit(onSubmit)}
-                            className="rounded-lg border w-full p-4 px-3 md:px-6 focus-within:shadow-sm grid grid-cols-12 gap-2"
+            <div className="px-4 lg:px-8 w-full max-w-2xl">
+                <Form {...form}>
+                    <form
+                        onSubmit={form.handleSubmit(onSubmit)}
+                        className="rounded-lg border border-gray-700 w-full p-4 px-3 md:px-6 bg-gray-500 focus-within:shadow-sm grid grid-cols-12 gap-2"
+                    >
+                        <FormField
+                            name="prompt"
+                            render={({ field }) => (
+                                <FormItem className="col-span-12 lg:col-span-10">
+                                    <FormControl className="m-0 p-0">
+                                        <Input
+                                            disabled={isLoading}
+                                            placeholder="Simple to-do calculator using ReactJS"
+                                            className="pl-2 border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent w-full h-10 rounded-lg bg-gray-700 text-gray-300 text-lg"
+                                            {...field}
+                                        />
+                                    </FormControl>
+                                </FormItem>
+                            )}
+                        />
+                        <Button
+                            disabled={isLoading}
+                            className="col-span-12 lg:col-span-2 w-full bg-green-600 hover:bg-green-500"
                         >
-                            <FormField
-                                name="prompt"
-                                render={({ field }) => (
-                                    <FormItem className="col-span-12 lg:col-span-10">
-                                        <FormControl className="m-0 p-0">
-                                            <Input
-                                                disabled={isLoading}
-                                                placeholder="Simple to-do calculator using ReactJS"
-                                                className="pl-2 border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent w-full h-10 rounded-lg bg-gray-100 text-gray-800 text-lg"
-                                                {...field}
-                                            />
-                                        </FormControl>
-                                    </FormItem>
-                                )}
-                            />
-                            <Button
-                                disabled={isLoading}
-                                className="col-span-12 lg:col-span-2 w-full"
-                            >
-                                Generate
-                            </Button>
-                        </form>
-                    </Form>
-                </div>
-                <div className="space-y-4 mt-4">
-                {isLoading && (
-            <div className="p-8 rounded-lg w-full flex items-center justify-center bg-muted">
-              <Loader />
-            </div>
-          )}
+                            Generate
+                        </Button>
+                    </form>
+                </Form>
+                <div className="space-y-4 mt-4 w-full">
+                    {isLoading && (
+                        <div className="p-8 rounded-lg w-full flex items-center justify-center bg-gray-800 text-gray-300">
+                            <Loader />
+                        </div>
+                    )}
                     {messages.length === 0 && !isLoading && (
-                    <Empty label="No Conversation Started Yet." />
-                 )}           
+                        <Empty label="No Conversation Started Yet." />
+                    )}
                     <div className="flex flex-col-reverse gap-y-4">
                         {messages?.map((message, index) => (
-                            <div key={index} className="bg-blue-100 text-blue-900 p-4 rounded-lg">
+                            <div key={index} className="bg-gray-800 text-gray-300 p-4 rounded-lg">
                                 {typeof message === "string" ? (
-                                    <p className="text-lg whitespace-pre-line">{message}</p>
+                                    <pre className="text-lg whitespace-pre-line">{message}</pre>
                                 ) : (
                                     <p className="text-lg">Invalid content</p>
                                 )}
