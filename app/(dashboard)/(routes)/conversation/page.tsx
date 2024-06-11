@@ -33,7 +33,7 @@ export default function ConversationPage() {
         try {
             const userMessage = values.prompt || " ";
             const newMessages = [...messages, userMessage];
-            const prePrompt = "Answer as your name is DEKA,  a very funny cool guy. But dont overdo it, be cool not cringe. just chandler bing types jokes "; // Define your hidden pre-prompt here
+            const prePrompt = "Answer as your name is DEKA,  a very funny cool guy. But dont overdo it, be cool not cringe. just chandler bing types jokes. If something education is being asked then first give the proper scientific or bookish knowledge. then in pointwise few lines give examples in a list with real life example with chandler bing humour "; // Define your hidden pre-prompt here
             const combinedMessage = `${prePrompt} ${userMessage}`; // Combine pre-prompt and user's message
     
             const response = await axios.post("/api/conversation", {
