@@ -17,7 +17,7 @@ const DiscussionPage: React.FC = () => {
       title,
       content,
     };
-    setPosts([...posts, newPost]);
+    // setPosts([...posts, newPost]);
   };
 
   return (
