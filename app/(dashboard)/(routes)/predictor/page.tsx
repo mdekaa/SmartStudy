@@ -20,8 +20,8 @@ import Sgpa from "@/components/sgpa"
 import { useState } from "react"
 
 export default function TabsDemo() {
-  const subjectCode = ['01', '02', '03', '04', '05', '06'];
-  const credits = ['28', '27', '23', '24', '50', '6'];
+  const subjectCode = ['01', '02', '03', '04', '05', '06','11','12','13'];
+  const subcredits = [4,4,4,4,3,3,2,2,2];
   const [branchCode, setBranchCode] = useState('EC');
   const [year, setyear] = useState<number>(3);
   
@@ -33,7 +33,7 @@ export default function TabsDemo() {
 
 
       </TabsList>
-          <Sgpa subjectCode={subjectCode} branchCode={branchCode} year={year}/>
+          <Sgpa subjectCode={subjectCode} branchCode={branchCode} subcredits={subcredits} year={year}/>
     </Tabs>
   )
 }
