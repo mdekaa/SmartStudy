@@ -19,6 +19,7 @@ import {
 import Sgpa from "@/components/sgpa"
 import { useState } from "react"
 
+
 export default function TabsDemo() {
   const subjectCode = ['01', '02', '03', '04', '05', '06','11','12','13'];
   const subcredits = [4,4,4,4,3,3,2,2,2];
