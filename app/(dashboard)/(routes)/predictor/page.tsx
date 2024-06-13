@@ -21,7 +21,7 @@ import { useState } from "react"
 
 
 export default function TabsDemo() {
-  const subjectCode = ['01', '02', '03', '04', '05', '06','11','12','13'];
+  const subjectCode = ['EC-301', 'EC-302', 'EC-303', 'EC-304', 'EC-305', 'EC-306','EC-311','EC-312','EC-313'];
   const subcredits = [4,4,4,4,3,3,2,2,2];
   const [branchCode, setBranchCode] = useState('EC');
   const [year, setyear] = useState<number>(3);

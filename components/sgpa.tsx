@@ -7,13 +7,14 @@ import { TabsContent } from "@/components/ui/tabs";
 import { useToast } from "@/components/ui/use-toast"
 import { Slider } from "@/components/ui/slider"
 import { Switch } from "@/components/ui/switch"
-
+import LineChart from './lineChart';
 interface SgpaProps {
   subjectCode: string[];
   branchCode: string;
   year: number;
   subcredits:number[];
 }
+
 
 const Sgpa: React.FC<SgpaProps> = ({ subjectCode, branchCode,subcredits, year }) => {
   const [subs, setSubs] = useState(0);
@@ -62,7 +63,12 @@ const Sgpa: React.FC<SgpaProps> = ({ subjectCode, branchCode,subcredits, year })
     setShowSlider(checked);
   };
  
+  const generateLabels = (branchCode: string, year: number, subjectCodes: string[]): string[] => {
+    return subjectCodes.map(subjectCode => `${branchCode}-${year}${subjectCode}`);
+};
+  
   return (
+    <div className='flex gap-2'>
     <TabsContent value="sgpa">
       <Card>
         <CardHeader>
@@ -75,12 +81,12 @@ const Sgpa: React.FC<SgpaProps> = ({ subjectCode, branchCode,subcredits, year })
           <Label htmlFor="Slider">Slider</Label>
           <Switch onCheckedChange={handleSwitchChange} checked={showSlider} />
           </div>
-
         </CardHeader>
         {[...Array(subs)].map((_, index) => (
           <CardContent key={index} className="space-y-2">
             <div className="space-y-1">
-              <Label htmlFor={`subject-${index}`}>{`${branchCode}-${year}${subjectCode[index]}`}</Label>
+              {/* <Label htmlFor={`subject-${index}`}>{`${branchCode}-${year}${subjectCode[index]}`}</Label> */}
+              <Label htmlFor={`subject-${index}`}>{subjectCode[index]}</Label>
 
               {(showSlider)?(
                 <>
@@ -120,6 +126,8 @@ const Sgpa: React.FC<SgpaProps> = ({ subjectCode, branchCode,subcredits, year })
         </CardFooter>
       </Card>
     </TabsContent>
+      <LineChart title="SGPA" label={subjectCode} datas={gradePoints}/>
+    </div>
   );
 };
 

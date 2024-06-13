@@ -1,373 +1,73 @@
-'use client'
+// components/LineChart.tsx
+import React from 'react';
+import { Bar } from 'react-chartjs-2';
+import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, BarElement, Title, Tooltip, Legend } from 'chart.js';
 
-// install (please try to align the version of installed @nivo packages)
-// yarn add @nivo/bump
-import { ResponsiveBump } from '@nivo/bump'
-
-// make sure parent container have a defined height when using
-// responsive component, otherwise height will be 0 and
-// no chart will be rendered.
-// website examples showcase many properties,
-// you'll often use just a few of them.
-
-const MyResponsiveBump = (data:any) => {
-  return (
-    <ResponsiveBump
-        data={data}
-        colors={{ scheme: 'spectral' }}
-        lineWidth={3}
-        activeLineWidth={6}
-        inactiveLineWidth={3}
-        inactiveOpacity={0.15}
-        pointSize={10}
-        activePointSize={16}
-        inactivePointSize={0}
-        pointColor={{ theme: 'background' }}
-        pointBorderWidth={3}
-        activePointBorderWidth={3}
-        pointBorderColor={{ from: 'serie.color' }}
-        axisTop={{
-            tickSize: 5,
-            tickPadding: 5,
-            tickRotation: 0,
-            legend: '',
-            legendPosition: 'middle',
-            legendOffset: -36,
-            truncateTickAt: 0
-        }}
-        axisBottom={{
-            tickSize: 5,
-            tickPadding: 5,
-            tickRotation: 0,
-            legend: '',
-            legendPosition: 'middle',
-            legendOffset: 32,
-            truncateTickAt: 0
-        }}
-        axisLeft={{
-            tickSize: 5,
-            tickPadding: 5,
-            tickRotation: 0,
-            legend: 'ranking',
-            legendPosition: 'middle',
-            legendOffset: -40,
-            truncateTickAt: 0
-        }}
-        margin={{ top: 40, right: 100, bottom: 40, left: 60 }}
-        axisRight={null}
-    />
+ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    BarElement,
+    Title,
+    Tooltip,
+    Legend
 );
-}
 
-const LineChart=()=>{
-  const data=[
-    {
-      "id": "Serie 1",
-      "data": [
-        {
-          "x": "2000",
-          "y": 10
-        },
-        {
-          "x": "2001",
-          "y": 6
-        },
-        {
-          "x": "2002",
-          "y": 2
-        },
-        {
-          "x": "2003",
-          "y": 8
-        },
-        {
-          "x": "2004",
-          "y": 8
-        }
-      ]
-    },
-    {
-      "id": "Serie 2",
-      "data": [
-        {
-          "x": "2000",
-          "y": 8
-        },
-        {
-          "x": "2001",
-          "y": 10
-        },
-        {
-          "x": "2002",
-          "y": 11
-        },
-        {
-          "x": "2003",
-          "y": 5
-        },
-        {
-          "x": "2004",
-          "y": 1
-        }
-      ]
-    },
-    {
-      "id": "Serie 3",
-      "data": [
-        {
-          "x": "2000",
-          "y": 12
-        },
-        {
-          "x": "2001",
-          "y": 2
-        },
-        {
-          "x": "2002",
-          "y": 4
-        },
-        {
-          "x": "2003",
-          "y": 7
-        },
-        {
-          "x": "2004",
-          "y": 2
-        }
-      ]
-    },
-    {
-      "id": "Serie 4",
-      "data": [
-        {
-          "x": "2000",
-          "y": 2
-        },
-        {
-          "x": "2001",
-          "y": 4
-        },
-        {
-          "x": "2002",
-          "y": 5
-        },
-        {
-          "x": "2003",
-          "y": 6
-        },
-        {
-          "x": "2004",
-          "y": 5
-        }
-      ]
-    },
-    {
-      "id": "Serie 5",
-      "data": [
-        {
-          "x": "2000",
-          "y": 5
-        },
-        {
-          "x": "2001",
-          "y": 3
-        },
-        {
-          "x": "2002",
-          "y": 7
-        },
-        {
-          "x": "2003",
-          "y": 12
-        },
-        {
-          "x": "2004",
-          "y": 4
-        }
-      ]
-    },
-    {
-      "id": "Serie 6",
-      "data": [
-        {
-          "x": "2000",
-          "y": 4
-        },
-        {
-          "x": "2001",
-          "y": 5
-        },
-        {
-          "x": "2002",
-          "y": 3
-        },
-        {
-          "x": "2003",
-          "y": 3
-        },
-        {
-          "x": "2004",
-          "y": 9
-        }
-      ]
-    },
-    {
-      "id": "Serie 7",
-      "data": [
-        {
-          "x": "2000",
-          "y": 6
-        },
-        {
-          "x": "2001",
-          "y": 7
-        },
-        {
-          "x": "2002",
-          "y": 9
-        },
-        {
-          "x": "2003",
-          "y": 1
-        },
-        {
-          "x": "2004",
-          "y": 10
-        }
-      ]
-    },
-    {
-      "id": "Serie 8",
-      "data": [
-        {
-          "x": "2000",
-          "y": 1
-        },
-        {
-          "x": "2001",
-          "y": 9
-        },
-        {
-          "x": "2002",
-          "y": 12
-        },
-        {
-          "x": "2003",
-          "y": 2
-        },
-        {
-          "x": "2004",
-          "y": 6
-        }
-      ]
-    },
-    {
-      "id": "Serie 9",
-      "data": [
-        {
-          "x": "2000",
-          "y": 7
-        },
-        {
-          "x": "2001",
-          "y": 11
-        },
-        {
-          "x": "2002",
-          "y": 10
-        },
-        {
-          "x": "2003",
-          "y": 11
-        },
-        {
-          "x": "2004",
-          "y": 12
-        }
-      ]
-    },
-    {
-      "id": "Serie 10",
-      "data": [
-        {
-          "x": "2000",
-          "y": 9
-        },
-        {
-          "x": "2001",
-          "y": 12
-        },
-        {
-          "x": "2002",
-          "y": 8
-        },
-        {
-          "x": "2003",
-          "y": 10
-        },
-        {
-          "x": "2004",
-          "y": 3
-        }
-      ]
-    },
-    {
-      "id": "Serie 11",
-      "data": [
-        {
-          "x": "2000",
-          "y": 3
-        },
-        {
-          "x": "2001",
-          "y": 1
-        },
-        {
-          "x": "2002",
-          "y": 1
-        },
-        {
-          "x": "2003",
-          "y": 4
-        },
-        {
-          "x": "2004",
-          "y": 7
-        }
-      ]
-    },
-    {
-      "id": "Serie 12",
-      "data": [
-        {
-          "x": "2000",
-          "y": 11
-        },
-        {
-          "x": "2001",
-          "y": 8
-        },
-        {
-          "x": "2002",
-          "y": 6
-        },
-        {
-          "x": "2003",
-          "y": 9
-        },
-        {
-          "x": "2004",
-          "y": 11
-        }
-      ]
-    }
-  ]
-  return (
-    <>
-      <h1>Line Chart</h1>
-      <MyResponsiveBump data={data}/>
-    </>
-  )
-}
+const LineChart: React.FC = (props:any) => {
+    const {label,title,datas}=props
+    const data = {
+        labels: label,
+        datasets: [
+            {
+                label: title,
+                data: datas,
+                fill: false,
+                // borderColor: 'rgb(75, 192, 192)',
+                tension: 0.5,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(255, 205, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(201, 203, 207, 0.2)'
+                  ],
+                  borderColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(255, 159, 64)',
+                    'rgb(255, 205, 86)',
+                    'rgb(75, 192, 192)',
+                    'rgb(54, 162, 235)',
+                    'rgb(153, 102, 255)',
+                    'rgb(201, 203, 207)'
+                  ],
+                  borderWidth: 1
+            }
+        ],
+    };
 
-export default LineChart
+    const options = {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'top' as const,
+            },
+            title: {
+                display: true,
+                text: 'SCGPA Graph for each Subject',
+            },
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                min: 0, // Minimum value for the y-axis
+                max: 10, // Maximum value for the y-axis
+            },
+        }
+    };
+
+    return <Bar data={data} options={options} width={5} height={5}/>;
+};
+
+export default LineChart;
