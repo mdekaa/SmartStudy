@@ -13,7 +13,7 @@ ChartJS.register(
     Legend
 );
 
-const LineChart: React.FC = (props:any) => {
+const BarChart: React.FC = (props:any) => {
     const {label,title,datas}=props
     const data = {
         labels: label,
@@ -70,4 +70,4 @@ const LineChart: React.FC = (props:any) => {
     return <Bar data={data} options={options} width={5} height={5}/>;
 };
 
-export default LineChart;
+export default BarChart;

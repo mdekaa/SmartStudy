@@ -4,10 +4,9 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { TabsContent } from "@/components/ui/tabs";
-import { useToast } from "@/components/ui/use-toast"
 import { Slider } from "@/components/ui/slider"
 import { Switch } from "@/components/ui/switch"
-import LineChart from './lineChart';
+import BarChart from './barChart';
 interface SgpaProps {
   subjectCode: string[];
   branchCode: string;
@@ -19,7 +18,6 @@ interface SgpaProps {
 const Sgpa: React.FC<SgpaProps> = ({ subjectCode, branchCode,subcredits, year }) => {
   const [subs, setSubs] = useState(0);
   const [gradePoints, setGradePoints] = useState<number[]>(Array(subs).fill(0));
-  const { toast } = useToast()
   const [sgpa, setSgpa] = useState(0);
   const [showSlider, setShowSlider] = useState(true);
 
@@ -63,10 +61,7 @@ const Sgpa: React.FC<SgpaProps> = ({ subjectCode, branchCode,subcredits, year })
   const handleSwitchChange = (checked: boolean) => {
     setShowSlider(checked);
   };
- 
-  const generateLabels = (branchCode: string, year: number, subjectCodes: string[]): string[] => {
-    return subjectCodes.map(subjectCode => `${branchCode}-${year}${subjectCode}`);
-};
+
   
   return (
     <TabsContent value="sgpa">
@@ -75,12 +70,12 @@ const Sgpa: React.FC<SgpaProps> = ({ subjectCode, branchCode,subcredits, year })
       <div>
       <Card className='m-3'>
       <CardHeader>
-          <CardTitle>Calcualted SGPA for the sem</CardTitle>
+          <CardTitle>Calculated SGPA for the sem</CardTitle>
           <CardDescription>SGPA is {sgpa} </CardDescription>
       </CardHeader>
     </Card>
       
-      <Card>
+    <Card className='m-3'>
         <CardHeader>
           <CardTitle>SGPA</CardTitle>
           <CardDescription>
@@ -136,7 +131,7 @@ const Sgpa: React.FC<SgpaProps> = ({ subjectCode, branchCode,subcredits, year })
         </CardFooter>
       </Card>
       </div>
-      <LineChart title="SGPA" label={subjectCode} datas={gradePoints}/>
+      <BarChart title="SGPA" label={subjectCode} datas={gradePoints}/>
     </div>
 
     </TabsContent>
