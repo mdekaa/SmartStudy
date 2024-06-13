@@ -20,6 +20,7 @@ const Sgpa: React.FC<SgpaProps> = ({ subjectCode, branchCode,subcredits, year })
   const [subs, setSubs] = useState(0);
   const [gradePoints, setGradePoints] = useState<number[]>(Array(subs).fill(0));
   const { toast } = useToast()
+  const [sgpa, setSgpa] = useState(0);
   const [showSlider, setShowSlider] = useState(true);
 
   const incrementSubs = () => {
@@ -54,8 +55,8 @@ const Sgpa: React.FC<SgpaProps> = ({ subjectCode, branchCode,subcredits, year })
     if(subs<=0)
       alert("Please add subjects to calculate SGPA");
   else{
-     alert(`Your SGPA is: ${sgpa.toFixed(2)}`);
-     toast({description: `Your SGPA is: ${sgpa.toFixed(2)}`})
+    setSgpa(sgpa.toFixed(2) as unknown as number);
+    alert(`Your SGPA is: ${sgpa.toFixed(2)}`);
   }
   };
 
@@ -68,8 +69,17 @@ const Sgpa: React.FC<SgpaProps> = ({ subjectCode, branchCode,subcredits, year })
 };
   
   return (
-    <div className='flex gap-2'>
     <TabsContent value="sgpa">
+      
+      <div className='flex gap-10'>
+      <div>
+      <Card className='m-3'>
+      <CardHeader>
+          <CardTitle>Calcualted SGPA for the sem</CardTitle>
+          <CardDescription>SGPA is {sgpa} </CardDescription>
+      </CardHeader>
+    </Card>
+      
       <Card>
         <CardHeader>
           <CardTitle>SGPA</CardTitle>
@@ -125,9 +135,11 @@ const Sgpa: React.FC<SgpaProps> = ({ subjectCode, branchCode,subcredits, year })
           <Button onClick={handleCalculate}>Calculate</Button>
         </CardFooter>
       </Card>
-    </TabsContent>
+      </div>
       <LineChart title="SGPA" label={subjectCode} datas={gradePoints}/>
     </div>
+
+    </TabsContent>
   );
 };
 

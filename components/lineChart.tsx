@@ -55,7 +55,7 @@ const LineChart: React.FC = (props:any) => {
             },
             title: {
                 display: true,
-                text: 'SCGPA Graph for each Subject',
+                text: `${title} Graph for each Subject`,
             },
         },
         scales: {
