@@ -13,8 +13,15 @@ ChartJS.register(
     Legend
 );
 
-const BarChart: React.FC = (props:any) => {
-    const {label,title,datas}=props
+
+interface BarChartProps {
+    label: string[];
+    title: string; 
+    datas: number[];
+}
+
+const BarChart: React.FC<BarChartProps> = ({ label, title, datas }) => {
+    // const {label,name,datas}=props
     const data = {
         labels: label,
         datasets: [
