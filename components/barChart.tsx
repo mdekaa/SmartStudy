@@ -16,17 +16,17 @@ ChartJS.register(
 
 interface BarChartProps {
     label: string[];
-    title: string; 
+    titles: string; 
     datas: number[];
 }
 
-const BarChart: React.FC<BarChartProps> = ({ label, title, datas }) => {
+const BarChart: React.FC<BarChartProps> = ({ label, titles, datas }) => {
     // const {label,name,datas}=props
     const data = {
         labels: label,
         datasets: [
             {
-                label: title,
+                label: titles,
                 data: datas,
                 fill: false,
                 // borderColor: 'rgb(75, 192, 192)',
@@ -62,7 +62,7 @@ const BarChart: React.FC<BarChartProps> = ({ label, title, datas }) => {
             },
             title: {
                 display: true,
-                text: `${title} Graph for each Subject`,
+                text: `${titles} Graph for each Subject`,
             },
         },
         scales: {

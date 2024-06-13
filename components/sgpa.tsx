@@ -131,7 +131,7 @@ const Sgpa: React.FC<SgpaProps> = ({ subjectCode, branchCode,subcredits, year })
         </CardFooter>
       </Card>
       </div>
-      <BarChart title="SGPA" label={subjectCode} datas={gradePoints}/>
+      <BarChart titles="SGPA" label={subjectCode} datas={gradePoints}/>
     </div>
 
     </TabsContent>
