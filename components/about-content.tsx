@@ -5,13 +5,13 @@ import { cn } from "@/lib/utils";
 
 
 import {
-    
-    Percent,
-    Handshake,
-    Lightbulb,
-    Goal
 
-  } from "lucide-react";
+  Percent,
+  Handshake,
+  Lightbulb,
+  Goal
+
+} from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 
@@ -29,12 +29,12 @@ const offers = [
   {
     name: "Comprehensive Insights",
     avatar: Lightbulb,
-    description:"Beyond predictions, we provide detailed insights and analysis to help you understand the factors impacting your academic performance"
+    description: "Beyond predictions, we provide detailed insights and analysis to help you understand the factors impacting your academic performance"
   },
   {
     name: "Goal Setting",
     avatar: Goal,
-    description:"Set your academic targets and track your progress towards achieving them. Our platform offers personalized tips and strategies to help you stay on track"
+    description: "Set your academic targets and track your progress towards achieving them. Our platform offers personalized tips and strategies to help you stay on track"
   }
 ];
 
@@ -53,15 +53,15 @@ export default function AboutContent() {
             <CardHeader>
               <div className="flex flex-row items-center">
                 <div className="h-10 w-10 mr-4">
-                    <div className="flex items-center flex-1">
+                  <div className="flex items-center flex-1">
                     <item.avatar className={cn("h-5 w-5 mr-3")} />
-                    
-                </div>
+
+                  </div>
                 </div>
                 <CardTitle className="flex items-center gap-x-2">
                   <div>
                     <p className="text-lg">{item.name}</p>
-                    {/* <p className="text-zinc-400 text-sm">{item.title}</p> */}
+                    
                   </div>
                 </CardTitle>
               </div>

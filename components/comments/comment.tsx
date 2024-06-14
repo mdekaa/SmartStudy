@@ -1,5 +1,6 @@
 import React from "react";
 import CommentForm from "./comment-form";
+import Profile from "./profile.png"
 
 interface CommentProps {
   comment: {
@@ -43,22 +44,23 @@ const Comment: React.FC<CommentProps> = ({
     activeComment &&
     activeComment.id === comment.id &&
     activeComment.type === "replying";
-  const fiveMinutes = 300000;
-  const timePassed = new Date().getTime() - new Date(comment.createdAt).getTime() > fiveMinutes;
   const canDelete =
-    currentUserId === comment.userId && replies.length === 0 && !timePassed;
+    currentUserId === comment.userId && replies.length === 0 ;
   const canReply = Boolean(currentUserId);
-  const canEdit = currentUserId === comment.userId && !timePassed;
+  const canEdit = currentUserId === comment.userId;
   const replyId = parentId ? parentId : comment.id;
   const createdAt = new Date(comment.createdAt).toLocaleDateString();
   return (
     <div key={comment.id} className="flex mb-7">
-      <div className="w-full">
+      <div className=" ml-3 mt-3 w-1/12 ">
+        <img src={Profile.src} className=" rounded-xl w-1/3 ml-12"/>
+      </div>
+      <div className="w-full ">
         <div className="flex">
-          <div className="m-2 mx-5 text-lg">{comment.username}</div>
+          <div className="m-2 mx-3 text-lg">{comment.username}</div>
           <div className="m-2 ml-10">{createdAt}</div>
         </div>
-        {!isEditing && <div className="m-2 mx-5 flex text-lg  ">{comment.body}</div>}
+        {!isEditing && <div className="m-1 mx-3 flex text-lg  ">{comment.body}</div>}
         {isEditing && (
           <CommentForm
             submitLabel="Update"
@@ -70,10 +72,11 @@ const Comment: React.FC<CommentProps> = ({
             }}
           />
         )}
+
         <div className="flex text-base cursor-pointer mt-2">
           {canReply && (
             <div
-              className=" mx-5 hover:underline"
+              className=" mx-3 hover:underline"
               onClick={() =>
                 setActiveComment({ id: comment.id, type: "replying" })
               }
@@ -83,7 +86,7 @@ const Comment: React.FC<CommentProps> = ({
           )}
           {canEdit && (
             <div
-              className=" mx-5 hover:underline"
+              className=" mx-3 hover:underline"
               onClick={() =>
                 setActiveComment({ id: comment.id, type: "editing" })
               }
@@ -93,7 +96,7 @@ const Comment: React.FC<CommentProps> = ({
           )}
           {canDelete && (
             <div
-              className=" mx-5 hover:underline"
+              className=" mx-3 hover:underline"
               onClick={() => deleteComment(comment.id)}
             >
               Delete
@@ -106,6 +109,7 @@ const Comment: React.FC<CommentProps> = ({
             handleSubmit={(text: string) => addComment(text, replyId)}
           />
         )}
+        <hr className="text-sm from-slate-600 to-slate-900"/>
         {replies.length > 0 && (
           <div className="replies">
             {replies.map((reply) => (
@@ -122,6 +126,7 @@ const Comment: React.FC<CommentProps> = ({
                 currentUserId={currentUserId}
               />
             ))}
+            
           </div>
         )}
       </div>
