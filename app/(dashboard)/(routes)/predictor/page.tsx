@@ -6,21 +6,22 @@ import {
     TabsList,
     TabsTrigger,
 } from "@/components/ui/tabs"
+import { Cgpa } from "@/components/cgpa"
 
 
 
 
 const page = () => {
     return (
-        <Tabs defaultValue="SGPA" className="w-[400px]">
+        <Tabs defaultValue="sgpa" className="w-[400px]">
             <TabsList>
-                <TabsTrigger value="SGPA">SGPA</TabsTrigger>
-                <TabsTrigger value="CGPA">CGPA</TabsTrigger>
+                <TabsTrigger value="sgpa">SGPA</TabsTrigger>
+                <TabsTrigger value="cgpa">CGPA</TabsTrigger>
             </TabsList>
-            <TabsContent value="SGPA">
+            <TabsContent value="sgpa">
             </TabsContent>
-            <TabsContent value="CGPA">
-                Implementing soon.
+            <TabsContent value="cgpa">
+                <Cgpa />
             </TabsContent>
         </Tabs>
 
