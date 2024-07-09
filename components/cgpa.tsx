@@ -40,7 +40,7 @@ export const Cgpa = () => {
         const X = parseFloat(expectedCgpa)
 
         if (isNaN(Z) || Z < 0 || Z > 10) {
-            console.log({
+            setMessage({
                 variant: "destructive",
                 title: "Invalid CGPA",
                 description: "Please enter a valid CGPA between 0 and 10 for the previous semester.",
@@ -49,7 +49,7 @@ export const Cgpa = () => {
         }
 
         if (isNaN(X) || X < 0 || X > 10) {
-            console.log({
+            setMessage({
                 variant: "destructive",
                 title: "Invalid Expected CGPA",
                 description: "Please enter a valid expected CGPA between 0 and 10.",
