@@ -12,23 +12,25 @@ import {
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { useToast } from "@/components/ui/use-toast"
+import { cn } from "@/lib/utils"
 
 export const Cgpa = () => {
     const { toast } = useToast()
     const [semester, setSemester] = useState(1)
     const [previousCgpa, setPreviousCgpa] = useState("")
     const [expectedCgpa, setExpectedCgpa] = useState("")
+    const [message, setMessage] = useState({ title: "", description: "", variant: "" })
 
-    const handleSemesterChange = (value) => {
+    const handleSemesterChange = (value: any) => {
         setSemester(parseInt(value, 10))
     }
 
 
-    const handlePreviousCgpaChange = (e) => {
+    const handlePreviousCgpaChange = (e: React.ChangeEvent<any>) => {
         setPreviousCgpa(e.target.value)
     }
 
-    const handleExpectedCgpaChange = (e) => {
+    const handleExpectedCgpaChange = (e: React.ChangeEvent<any>) => {
         setExpectedCgpa(e.target.value)
     }
 
@@ -57,22 +59,23 @@ export const Cgpa = () => {
 
         const requiredSgpa = (6 * X - (Y - 1) * Z) / (7 - Y)
         if (requiredSgpa > 10) {
-            console.log({
+            setMessage({
                 variant: "destructive",
                 title: "Sorry",
                 description: `It is not possible to achieve CGPA of ${X} by having current CGPA of ${Z}`,
-
             })
             return
         }
-        console.log({
+
+        setMessage({
+            variant: "success",
             title: "Required SGPA",
             description: `To achieve an expected CGPA of ${X}, you need to maintain an SGPA of ${requiredSgpa.toFixed(2)} in the upcoming semesters.`,
         })
     }
 
     return (
-        <div>
+        <div className="p-4 bg-white rounded-lg shadow-md">
             <Select onValueChange={handleSemesterChange}>
                 <SelectTrigger className="w-full">
                     <SelectValue placeholder="Select Semester" />
@@ -107,6 +110,15 @@ export const Cgpa = () => {
             <Button className="mt-4" onClick={calculateRequiredSgpa}>
                 Calculate Required SGPA
             </Button>
+            {message.description && (
+                <div className={cn(
+                    "mt-4 p-4 rounded-lg border",
+                    message.variant === "destructive" ? "border-red-500 bg-red-100 text-red-800" : "border-green-500 bg-green-100 text-green-800"
+                )}>
+                    <h2 className="font-bold text-lg">{message.title}</h2>
+                    <p>{message.description}</p>
+                </div>
+            )}
         </div>
     )
 }
