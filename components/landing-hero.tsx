@@ -43,9 +43,7 @@ export default function LandingHero() {
           </Button>
         </Link>
       </div>
-      <div className="text-zinc-400 text-xs md:text-sm font-normal">
-        gorusur
-      </div>
+      
     </div>
   );
 }
