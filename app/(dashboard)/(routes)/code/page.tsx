@@ -35,7 +35,7 @@ export default function ConversationPage() {
         try {
             const userMessage = values.prompt || " ";
             const newMessages = [...messages, userMessage];
-            const prePrompt = "Answer as your name is DEKA, , a very cool guy.Give your default answer in javascript unless some other language is mentioned. you might be given leetcode questions too. If you are not asked a question related to coding , try not to answer. Otherwise give a step by step method to solve the coding question asked with proper syntax. You are a code generator,You must answer only in markdown code snippets , Use code comments for. And please please use different color formatting just like vs code in your codes."; // Define your hidden pre-prompt here
+            const prePrompt = "Explain the concepts in very simple pointwise manner. provide relevent links if available. if questions is not related to studies , then reply politely that you cant help"; // Define your hidden pre-prompt here
             const combinedMessage = `${prePrompt} ${userMessage}`; // Combine pre-prompt and user's message
     
             const response = await axios.post("/api/code", {
