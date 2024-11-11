@@ -12,11 +12,10 @@ import {
   BookOpen,
   Calculator,
   Code,
-  Settings
+  Settings,
 } from "lucide-react";
 
 import { cn } from "@/lib/utils";
-
 
 const montserrat = Montserrat({ weight: "600", subsets: ["latin"] });
 
@@ -25,45 +24,51 @@ const routes = [
     label: "Dashboard",
     icon: LayoutDashboard,
     href: "/dashboard",
-    color: "text-sky-500"
+    color: "text-sky-500",
   },
-  
+
   {
     label: "Doubt Solver AI",
     icon: MessageSquare,
     href: "/conversation",
-    color: "text-violet-500"
+    color: "text-violet-500",
   },
   {
     label: "Code Generation",
     icon: Code,
     href: "/code",
-    color: "text-green-700"
+    color: "text-green-700",
   },
   {
     label: "Community Discussion",
     icon: HandHelping,
     href: "/community",
-    color: "text-pink-700"
+    color: "text-pink-700",
   },
   {
     label: "Resources",
     icon: BookOpen,
     href: "/resources",
-    color: "text-orange-700"
+    color: "text-orange-700",
   },
   {
     label: "CGPA Predictor",
     icon: Calculator,
     href: "/predictor",
-    color: "text-emerald-500"
+    color: "text-emerald-500",
   },
-  
+  {
+    label: "Focus Mode",
+    icon: Calculator,
+    href: "/focus",
+    color: "text-emerald-500",
+  },
+
   {
     label: "Settings",
     icon: Settings,
-    href: "/settings"
-  }
+    href: "/settings",
+  },
 ];
 
 export default function Sidebar() {
@@ -76,7 +81,12 @@ export default function Sidebar() {
           <div className="relative w-8 h-8 mr-4">
             <Image fill alt="LoGo" src="/fulllogo.png" />
           </div>
-          <h1 className={cn("text-2xl text-white font-bold", montserrat.className)}>
+          <h1
+            className={cn(
+              "text-2xl text-white font-bold",
+              montserrat.className
+            )}
+          >
             SmartStudy
           </h1>
         </Link>
@@ -100,7 +110,6 @@ export default function Sidebar() {
           ))}
         </div>
       </div>
-      
     </div>
   );
 }

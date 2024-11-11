@@ -22,10 +22,9 @@ export default function LandingHero() {
                 "Talk to Teachers",
                 "AI Doubt Solvers",
                 "Community Discussion",
-                
               ],
               autoStart: true,
-              loop: true
+              loop: true,
             }}
           />
         </div>
@@ -35,15 +34,11 @@ export default function LandingHero() {
       </div>
       <div>
         <Link href={isSignedIn ? "/dashboard" : "/sign-up"}>
-          <Button
-            
-            className="md:text-lg p-4 md:p-6 rounded-full font-semibold"
-          >
+          <Button className="md:text-lg p-4 md:p-6 rounded-full font-semibold">
             Register
           </Button>
         </Link>
       </div>
-      
     </div>
   );
 }
